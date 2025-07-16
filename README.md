@@ -1,6 +1,9 @@
 # 🍩 Dunkin' Donuts
 
-[<img width="1919" height="969" alt="image" src="https://github.com/user-attachments/assets/cd0b59e1-d2be-4eee-977c-8597f18ecdb6" />]
+<img width="1919" height="969" alt="image" src="https://github.com/user-attachments/assets/cd0b59e1-d2be-4eee-977c-8597f18ecdb6" />
+
+## Live Demo
+[Live Demo](https://mosjdeed.github.io/dunkin-donuts-website/)
 
 
 ## Overview
