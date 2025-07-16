@@ -49,6 +49,6 @@ A fully responsive recreation of the Dunkin' Donuts website featuring modern UI/
 
 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/dunkin-donuts-website.git
+git clone https://github.com/Mosjdeed/dunkin-donuts-website.git
 ```
 2. Open index.html in your browser
