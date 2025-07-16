@@ -29,15 +29,15 @@ A fully responsive recreation of the Dunkin' Donuts website featuring modern UI/
 
 ## 📁 Project Structure
 
-dunkin-donuts-website/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   └── app.js
-├── img/
-│   └── [all images]
-└── README.md
+- dunkin-donuts-website/
+- ├── index.html
+- ├── css/
+- │   └── style.css
+- ├── js/
+- │   └── app.js
+- ├── img/
+- │   └── [all images]
+- └── README.md
 
 ## 🎨 Color Palette
 - Orange: #FF671F
