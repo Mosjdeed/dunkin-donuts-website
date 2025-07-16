@@ -45,10 +45,6 @@ A fully responsive recreation of the Dunkin' Donuts website featuring modern UI/
 - Brown: #653024
 - Cream: #FFF4E6
 
-## 🤝 Acknowledgments
-- Original design inspiration from Dunkin' Donuts
-- Images from Dunkin' official resources
-
 ## 🔧 Installation
 
 1. Clone the repository
