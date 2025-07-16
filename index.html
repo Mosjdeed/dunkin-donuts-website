@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+        'dunkin-orange': '#FF671F',
+        'dunkin-magenta': '#DA1884',
+        'dunkin-brown': '#653024',
+        'dunkin-pink': '#FF9A9E',
+        'dunkin-light-pink': '#FFE5E6',
+        'dunkin-cream': '#FFF4E6',
+        'dunkin-dark': '#1A1A1A',
+        },
+        fontFamily: {
+        'fredoka': ['Fredoka One', 'cursive'],
+        },
+      },
+    }
+  }
+</script>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Dunkin Donuts</title>
+</head>
+<body>
+    <!-- Page Loader - Changed z-50 to z-[100] -->
+    <div id="loader" class="fixed inset-0 bg-white z-[100] flex items-center justify-center">
+        <img src="./img/dd_nav_logo.svg" class="h-20 animate-bounce" alt="Loading...">
+    </div>
+    <!--Nav-->
+    <nav id="nav" class=" fixed top-0 w-full bg-white shadow-md z-50 transition-all duration-300">
+        <div class="px-4 sm:px-6 lg:px-20">
+            <div class="flex justify-between items-center py-6">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="./img/dd_nav_logo.svg" alt="Dunkin Logo" class="h-10 md:h-12 w-auto cursor-pointer hover:scale-105 transition-transform duration-300" loading="lazy">
+                </div>
+                
+                <!-- nav items -->
+                <div class="hidden md:flex items-center">
+                    <ul class="grid grid-flow-col gap-10 font-fredoka">
+                        <li>
+                            <a href="#home" class="text-gray-700 font-semibold text-xl hover:text-dunkin-orange transition-colors duration-300 relative group">
+                                Home
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-dunkin-orange transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#menu" class="text-gray-700 font-semibold text-xl hover:text-dunkin-orange transition-colors duration-300 relative group">
+                                Menu
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-dunkin-orange transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="text-gray-700 font-semibold text-xl hover:text-dunkin-orange transition-colors duration-300 relative group">
+                                Contact
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-dunkin-orange transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#about" class="text-gray-700 font-semibold text-xl hover:text-dunkin-orange transition-colors duration-300 relative group">
+                                About
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-dunkin-orange transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#order" class="bg-dunkin-orange text-lg text-white px-6 py-2 rounded-full font-semibold hover:bg-dunkin-magenta transition-colors duration-300 transform hover:scale-105">
+                                Order Now
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-dunkin-orange focus:outline-none focus:text-dunkin-orange transition-colors duration-300">
+                        <i class="fas fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 pt-2 pb-3 space-y-1 font-fredoka">
+                <a href="#home" class="block px-3 py-2 text-gray-700 font-semibold text-lg hover:text-dunkin-orange hover:bg-dunkin-light-pink rounded-md transition-all duration-300">
+                    Home
+                </a>
+                <a href="#menu" class="block px-3 py-2 text-gray-700 font-semibold text-lg hover:text-dunkin-orange hover:bg-dunkin-light-pink rounded-md transition-all duration-300">
+                    Menu
+                </a>
+                <a href="#contact" class="block px-3 py-2 text-gray-700 font-semibold text-lg hover:text-dunkin-orange hover:bg-dunkin-light-pink rounded-md transition-all duration-300">
+                    Contact
+                </a>
+                <a href="#about" class="block px-3 py-2 text-gray-700 font-semibold text-lg hover:text-dunkin-orange hover:bg-dunkin-light-pink rounded-md transition-all duration-300">
+                    About
+                </a>
+                <a href="#order" class="block mx-3 my-4 bg-dunkin-orange text-center text-white px-6 py-3 rounded-full font-semibold hover:bg-dunkin-magenta transition-colors duration-300">
+                    Order Now
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!--End Nav-->
+
+    <main class="pt-20"> <!-- This accounts for nav height -->
+
+    <!--Hero section-->
+    <section id="home" class="mt-2 mx-4 sm:mx-8 lg:mx-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12">
+            <!-- Left Content -->
+            <div class="flex flex-col gap-6 order-2 lg:order-1">
+                <img src="./img/images.png" alt="Dunkin Logo" loading="lazy" class="w-48 sm:w-64 lg:w-80 mx-auto lg:mx-0">
+                <div class="space-y-6 text-center lg:text-left">
+                    <!-- Main Headline -->
+                    <h1 class="text-3xl sm:text-4xl lg:text-6xl font-bold text-dunkin-dark leading-tight">
+                        Order Ahead,    
+                        <br>
+                        <span class="text-dunkin-orange">Skip the Line</span>
+                    </h1>
+                    
+                    <!-- Subheadline -->
+                    <p class="text-lg sm:text-xl lg:text-2xl text-gray-700 max-w-lg mx-auto lg:mx-0">
+                        Get your favorite coffee and donuts ready when you are. 
+                        Order on the app, earn rewards!
+                    </p>
+                    
+                    <!-- Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
+                        <button class="bg-dunkin-orange text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-dunkin-magenta transition-all duration-300 transform hover:scale-105 shadow-lg w-full sm:w-auto">
+                            <i class="fas fa-mobile-alt mr-2"></i>
+                            Download App
+                        </button>
+                        <button class="bg-transparent border-2 border-dunkin-orange text-dunkin-orange px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-dunkin-orange hover:text-white transition-all duration-300 w-full sm:w-auto">
+                            <i class="fas fa-coffee mr-2"></i>
+                            View Menu
+                        </button>
+                    </div>
+                    
+                    <!-- App Store Badges -->
+                    <div class="flex gap-4 pt-4 px-2 justify-center lg:justify-start">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" 
+                            alt="App Store" 
+                            class="h-10 sm:h-12 cursor-pointer hover:opacity-80 transition-opacity">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
+                            alt="Google Play" 
+                            class="h-10 sm:h-12 cursor-pointer hover:opacity-80 transition-opacity">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Image -->
+            <div class="order-1 lg:order-2">
+                <img src="./img/iphone_web.png" alt="hero_img" loading="lazy" class="w-full max-w-sm mx-auto lg:max-w-full">
+            </div>
+        </div>
+    </section>
+    <!--End Hero section-->
+
+    <!--Hot deal-->
+    <section class="bg-gray-100 mt-8 overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 items-stretch min-h-[400px] lg:min-h-[500px]">
+            <!-- Left Content -->
+            <div class="flex items-center justify-center p-8 lg:p-12 order-2 lg:order-1">
+                <div class="text-center lg:text-left w-full max-w-2xl">
+                    <!-- Main Headline -->
+                    <div class="font-bold text-dunkin-orange font-fredoka space-y-4 lg:space-y-8">
+                        <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl xl:text-9xl">
+                            HOT <span class="text-dunkin-magenta">DEAL</span>
+                        </h2>
+                        <p class="text-4xl sm:text-5xl md:text-6xl lg:text-9xl xl:text-9xl">
+                            <span class="text-dunkin-magenta">Only</span> 
+                            <span class="text-dunkin-orange">$5</span>
+                        </p>
+                        
+                        <!--offer button-->
+                        <div class="mt-6 lg:mt-10">
+                            <button class="bg-dunkin-orange text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-lg sm:text-xl hover:bg-dunkin-magenta transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center gap-3 w-full sm:w-auto">
+                                <div class="bg-white/20 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">
+                                    <i class="fas fa-percent text-lg sm:text-xl"></i>
+                                </div>
+                                <span>Claim Offer Now</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Image - Full height -->
+            <div class="order-1 lg:order-2 h-full">
+                <img src="./img/img_Home_Desktop_v5@2x.png" 
+                    alt="$5 Meal Deal" 
+                    class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!--Menu Section-->
+    <section id="menu" class="py-16 px-4 sm:px-8 lg:px-20 ">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-fredoka font-bold text-dunkin-dark mb-4">
+                    Our <span class="text-dunkin-orange">Menu</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto">
+                    From our signature coffee to delicious donuts, find your perfect treat
+                </p>
+            </div>
+
+            <!-- Menu Categories -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button data-category="donuts" class="category-btn px-6 py-2 rounded-full font-semibold text-white bg-dunkin-orange hover:bg-dunkin-magenta hover:text-white transition-all duration-300">
+                    Donuts
+                </button>
+                <button data-category="coffee" class="category-btn px-6 py-2 rounded-full font-semibold text-dunkin-orange bg-white border-2 border-dunkin-orange hover:bg-dunkin-magenta hover:text-white transition-all duration-300">
+                    Coffee
+                </button>
+                <button data-category="sandwiches" class="category-btn px-6 py-2 rounded-full font-semibold text-dunkin-orange bg-white border-2 border-dunkin-orange hover:bg-dunkin-magenta hover:text-white transition-all duration-300">
+                    Sandwiches
+                </button>
+                <button data-category="combos" class="category-btn px-6 py-2 rounded-full font-semibold text-dunkin-orange bg-white border-2 border-dunkin-orange hover:bg-dunkin-magenta hover:text-white transition-all duration-300">
+                    Combos
+                </button>
+            </div>
+
+            <!-- Donuts -->
+            <div id="donuts" class="menu-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Menu Item 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/VanillaFrostedSprinklesDonut_570x570.png" 
+                            alt="Glazed Donut" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">sprinkles  Donut</h3>
+                        <p class="text-gray-600 text-sm mb-4">Classic sprinkles donut with chocolate</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.59</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Menu Item 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/singles_boston_kreme_3q_result.png" 
+                            alt="Boston Kreme" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Boston Kreme</h3>
+                        <p class="text-gray-600 text-sm mb-4">Filled with custard, topped with chocolate</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.89</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/19ce7434d7189c75318d87f213afccb2.jpg" 
+                            alt="Chocolate Frosted" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Chocolate Frosted</h3>
+                        <p class="text-gray-600 text-sm mb-4">Rich chocolate frosting on yeast donut</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.79</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/5c9ef2c53a0a0ba1a8cbd4d07648a13a.jpg" 
+                            alt="Latte" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Banana Donut</h3>
+                        <p class="text-gray-600 text-sm mb-4">Espresso with steamed milk</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$4.69</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Coffee -->
+            <div id="coffee" class=" menu-section grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 hidden">
+                <!-- Menu Item 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/b7dcdc3e097bc518be440d8340c49023.jpg" 
+                            alt="Glazed Donut" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Iced coffee</h3>
+                        <p class="text-gray-600 text-sm mb-4">Freshly brewed and perfectly chilled</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.59</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Menu Item 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/935df2377f28b11b51d408153ccceb71.jpg" 
+                            alt="Boston Kreme" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Hot coffee</h3>
+                        <p class="text-gray-600 text-sm mb-4">Signature blend, served fresh</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.89</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/frozen.jpg" 
+                            alt="Chocolate Frosted" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Frozen coffee</h3>
+                        <p class="text-gray-600 text-sm mb-4">Smooth, creamy and refreshing</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.79</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/latte.jpg" 
+                            alt="Latte" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Signature Latte</h3>
+                        <p class="text-gray-600 text-sm mb-4">Espresso with steamed milk</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$4.69</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sandwiches -->
+            <div id="sandwiches" class=" menu-section hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Menu Item 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/bacon.jpg" 
+                            alt="Glazed Donut" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Bacon, Egg & Cheese</h3>
+                        <p class="text-gray-600 text-sm mb-4">Classic breakfast sandwich on a bagel</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.59</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Menu Item 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/tuna.jpg" 
+                            alt="Boston Kreme" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Tuna Sandwich</h3>
+                        <p class="text-gray-600 text-sm mb-4">Tuna, American cheese, mayonnaise</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.89</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/egg.jpg" 
+                            alt="Chocolate Frosted" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Pastrami Egg Wrap</h3>
+                        <p class="text-gray-600 text-sm mb-4">Fresh Pastrami Egg Wrap</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.79</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/cros.jpg" 
+                            alt="Latte" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Croissant Sandwich</h3>
+                        <p class="text-gray-600 text-sm mb-4">Roumie and salami sandwich</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$4.69</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Combos -->
+            <div id="combos" class=" menu-section hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Menu Item 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/combo 1.jpg" 
+                            alt="Glazed Donut" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Morinig combo</h3>
+                        <p class="text-gray-600 text-sm mb-4">1 Bo Boy Sandwich with Donuts & Hot Coffee</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.59</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Menu Item 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/b0ef4ef9-252e-4f0f-bab4-ed1efcc41a6e.jpg" 
+                            alt="Boston Kreme" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Refresher combo</h3>
+                        <p class="text-gray-600 text-sm mb-4">1 Bo Boy Sandwich with Donuts & Iced Coffee</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.89</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/combo 3.jpg" 
+                            alt="Chocolate Frosted" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Cappuccino & 2 Donuts</h3>
+                        <p class="text-gray-600 text-sm mb-4">Cappuccino & 2 Donuts white and black</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$1.79</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="./img/combo 4.jpg" 
+                            alt="Latte" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Sharing combo</h3>
+                        <p class="text-gray-600 text-sm mb-4">4 Donuts with 2 Dunkin Iced Coffee</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-dunkin-orange">$4.69</span>
+                            <button class="bg-dunkin-orange text-white p-3 rounded-full hover:bg-dunkin-magenta transition-colors duration-300">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- View All Button -->
+            <div class="text-center mt-12">
+                <button class="bg-dunkin-orange text-white px-8 py-4 rounded-full font-fredoka text-lg hover:bg-dunkin-magenta transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center gap-3">
+                    <a href="https://www.elmenus.com/cairo/dunkin--9w2k" target="_blank">View Full Menu</a>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!--End Menu Section-->
+
+
+   <!-- Contact Section -->
+    <section id="contact" class="py-16 px-4 sm:px-8 lg:px-20 bg-dunkin-light-pink">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-fredoka font-bold text-dunkin-dark mb-4">
+                    Get Your <span class="text-dunkin-orange">Dunkin'</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto">
+                    Find a location near you or order through our delivery partners
+                </p>
+            </div>
+
+            <!-- Main Contact Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Left Side - Map -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-[400px] lg:h-[500px]">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3115.781870349589!2d31.30756351924356!3d30.076370933619955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fb6bab27551%3A0xf28ae9fac3a6e259!2sDunkin%20donuts!5e0!3m2!1sen!2seg!4v1752675344424!5m2!1sen!2seg"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="w-full h-full">
+                    </iframe>
+                </div>
+
+                <!-- Right Side - Our Partners -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <h3 class="text-3xl font-fredoka  text-dunkin-dark">Delivery Partners</h3>
+                    </div>
+                    <p class="text-gray-600 mb-8">Get Dunkin' delivered to your door through our trusted partners</p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <a href="https://www.talabat.com" target="_blank" 
+                        class="group bg-white border-2 border-orange-500 rounded-lg p-6 flex flex-col items-center justify-center hover:bg-orange-50 transition-all duration-300">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Talabat_logo.svg/1280px-Talabat_logo.svg.png" 
+                                alt="Talabat" 
+                                class="h-12 mb-3 group-hover:scale-110 transition-transform">
+                            <span class="text-orange-500 font-semibold">Talabat</span>
+                        </a>
+                        
+                        <a href="https://www.ubereats.com" target="_blank" 
+                        class="group bg-white border-2 border-black rounded-lg p-6 flex flex-col items-center justify-center hover:bg-gray-50 transition-all duration-300">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Uber_Eats_2020_logo.svg" 
+                                alt="Uber Eats" 
+                                class="h-12 mb-3 group-hover:scale-110 transition-transform">
+                            <span class="text-black font-semibold">Uber Eats</span>
+                        </a>
+                        
+                        <a href="https://www.elmenus.com/cairo/dunkin--9w2k" target="_blank" 
+                        class="group bg-white border-2 border-red-600 rounded-lg p-6 flex flex-col items-center justify-center hover:bg-red-50 transition-all duration-300">
+                                                            <img src="https://careers.recruiteecdn.com/image/upload/q_auto,f_auto,w_400,c_limit/production/images/BJcz/GlkiQk34LHOy.jpeg" 
+                                alt="Uber Eats" 
+                                class="h-12 mb-3 group-hover:scale-110 transition-transform">
+                            <span class="text-red-600 font-semibold">elmenus</span>
+                        </a>
+                        
+                        <a href="https://www.dunkindonuts.com/en/mobile-app" target="_blank" class="group bg-white border-2 border-dunkin-orange rounded-lg p-6 flex flex-col items-center justify-center hover:bg-dunkin-cream transition-all duration-300">
+                                <img src="./img/dunkin__donuts_logo_combination__2007___2022__by_vincerabina_dg92lft-fullview.png" 
+                                alt="Uber Eats" 
+                                class="h-12 mb-3 group-hover:scale-110 transition-transform">                            
+                            <span class="text-dunkin-orange font-semibold">Our application</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Hours Card -->
+                <div class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow">
+                    <div class="bg-dunkin-orange/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-clock text-2xl text-dunkin-orange"></i>
+                    </div>
+                    <h4 class="font-fredoka text-lg text-dunkin-dark mb-2">Store Hours</h4>
+                    <p class="text-sm text-gray-600">Mon - Thu: 6AM - 10PM</p>
+                    <p class="text-sm text-gray-600">Fri - Sun: 6AM - 11PM</p>
+                </div>
+
+                <!-- Phone Card -->
+                <div class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow">
+                    <div class="bg-dunkin-magenta/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-phone-alt text-2xl text-dunkin-magenta"></i>
+                    </div>
+                    <h4 class="font-fredoka text-lg text-dunkin-dark mb-1">Call Us</h4>
+                    <p class="text-sm text-gray-600">Hotline</p>
+                    <a href="tel:19655" class="text-lg font-bold text-dunkin-orange hover:text-dunkin-magenta transition-colors">19655</a>
+                </div>
+
+                <!-- Email Card -->
+                <div class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow">
+                    <div class="bg-dunkin-brown/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-envelope text-2xl text-dunkin-brown"></i>
+                    </div>
+                    <h4 class="font-fredoka text-lg text-dunkin-dark mb-1">Email Us</h4>
+                    <p class="text-sm text-gray-600">Customer Service</p>
+                    <a href="mailto:info@dunkinegypt.com" class="text-sm text-dunkin-orange hover:text-dunkin-magenta transition-colors break-all">info@dunkinegypt.com</a>
+                </div>
+
+                <!-- Social Card -->
+                <div class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow">
+                    <div class="bg-dunkin-pink/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-share-alt text-2xl text-dunkin-magenta"></i>
+                    </div>
+                    <h4 class="font-fredoka text-lg text-dunkin-dark mb-1">Follow Us</h4>
+                    <div class="flex justify-center gap-3 mt-3">
+                        <a href="https://www.facebook.com/DunkinEG/" target="_blank" class="text-dunkin-orange hover:text-dunkin-magenta transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="https://www.instagram.com/dunkin/?hl=en" target="_blank" class="text-dunkin-orange hover:text-dunkin-magenta transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="https://x.com/dunkindonuts?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank" class="text-dunkin-orange hover:text-dunkin-magenta transition-colors">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Contact Section -->
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4 sm:px-8 lg:px-20">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-fredoka font-bold text-dunkin-dark mb-4">
+                    About <span class="text-dunkin-orange">Dunkin'</span>
+                </h2>
+            </div>
+
+            <!-- Store Photo & Text -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <img src="https://i.pinimg.com/1200x/0a/c4/52/0ac4529c998ff600d14e9fbdc4f15e4c.jpg" 
+                        alt="Dunkin' Store" 
+                        class="w-full rounded-2xl shadow-lg">
+                </div>
+                <div>
+                    <h3 class="text-3xl font-fredoka text-dunkin-dark mb-4">
+                        Serving Egypt Since <span class="text-dunkin-orange">2018</span>
+                    </h3>
+                    <p class="text-gray-700 mb-4 text-lg">
+                        Dunkin' has been America's favorite all-day, everyday stop for coffee and baked goods since 1950. Today, we're proud to serve the Egyptian community with the same commitment to quality and service.
+                    </p>
+                    <p class="text-gray-700 mb-6">
+                        Every cup of coffee is brewed fresh, every donut is made with care, and every customer is served with a smile. That's the Dunkin' promise.
+                    </p>
+                    <div class="flex flex-wrap gap-6">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-coffee text-dunkin-orange text-xl"></i>
+                            <span class="font-semibold">Freshly Brewed</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-clock text-dunkin-orange text-xl"></i>
+                            <span class="font-semibold">Made Daily</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-heart text-dunkin-orange text-xl"></i>
+                            <span class="font-semibold">Served with Love</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="bg-dunkin-cream rounded-xl p-6 text-center">
+                    <h4 class="text-3xl font-fredoka font-bold text-dunkin-orange mb-2">15+</h4>
+                    <p class="text-gray-700">Stores in Egypt</p>
+                </div>
+                <div class="bg-dunkin-cream rounded-xl p-6 text-center">
+                    <h4 class="text-3xl font-fredoka font-bold text-dunkin-magenta mb-2">50+</h4>
+                    <p class="text-gray-700">Donut Varieties</p>
+                </div>
+                <div class="bg-dunkin-cream rounded-xl p-6 text-center">
+                    <h4 class="text-3xl font-fredoka font-bold text-dunkin-brown mb-2">12K+</h4>
+                    <p class="text-gray-700">Global Locations</p>
+                </div>
+                <div class="bg-dunkin-cream rounded-xl p-6 text-center">
+                    <h4 class="text-3xl font-fredoka font-bold text-dunkin-orange mb-2">70+</h4>
+                    <p class="text-gray-700">Years of Service</p>
+                </div>
+            </div>
+
+            <!-- Our Values -->
+            <div class="mb-16">
+                <h3 class="text-3xl font-fredoka font-bold text-center text-dunkin-dark mb-12">
+                    Our <span class="text-dunkin-orange">Values</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-dunkin-orange w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-medal text-white text-2xl"></i>
+                        </div>
+                        <h4 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Quality</h4>
+                        <p class="text-gray-600">Premium ingredients in every product we serve</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-dunkin-magenta w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bolt text-white text-2xl"></i>
+                        </div>
+                        <h4 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Speed</h4>
+                        <p class="text-gray-600">Fast service without compromising quality</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-dunkin-brown w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-smile text-white text-2xl"></i>
+                        </div>
+                        <h4 class="font-fredoka text-xl font-bold text-dunkin-dark mb-2">Service</h4>
+                        <p class="text-gray-600">Friendly service that brightens your day</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Subscribe -->
+            <div class="relative rounded-2xl overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[300px]">
+                    <!-- Left - Subscribe Form -->
+                    <div class="p-8 lg:p-12 z-10">
+                        <h3 class="text-3xl font-fredoka font-bold text-dunkin-dark mb-6">
+                            Subscribe with <span class="text-dunkin-orange">Us</span>
+                        </h3>
+                        
+                        <form id="newsletter-form">
+                            <div class="relative">
+                                <input 
+                                    type="email" 
+                                    placeholder="Enter your email address" 
+                                    class="w-full px-6 py-3 pr-32 rounded-full border-2 border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-dunkin-orange transition-colors"
+                                    required>
+                                <button 
+                                    type="submit" 
+                                    class="absolute right-1 top-1 bottom-1 bg-dunkin-orange text-white px-6 rounded-full font-bold hover:bg-dunkin-magenta transition-colors">
+                                    Subscribe
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Right - GIF -->
+                    <div class="relative h-full min-h-[300px] lg:min-h-[unset]">
+                        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/source/0982eb85001661.5d6eb4da38ce7.gif" 
+                            alt="Dunkin' Donuts Animation" 
+                            class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End About Section -->
+
+    <!-- Footer -->
+    <footer class="bg-dunkin-brown text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-20">
+            <!-- Footer Top -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Logo & Description -->
+                <div>
+                    <img src="./img/dd_nav_logo.svg" alt="Dunkin' Logo" class="h-12 mb-4 filter brightness-0 invert">
+                    <p class="text-gray-100 text-sm leading-relaxed"> 
+                        America runs on Dunkin'. Serving fresh coffee and delicious donuts since 1950.
+                    </p>
+                    <!-- Social Media -->
+                    <div class="flex gap-3 mt-6 text-dunkin-orange">
+                        <a href="https://www.facebook.com/DunkinEG/" class="bg-white/10 hover:bg-dunkin-orange   w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-white/20 hover:border-dunkin-orange hover:text-white"> <!-- Added subtle border and changed initial bg -->
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/dunkin/?hl=en" class="bg-white/10 hover:bg-dunkin-orange w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-white/20 hover:border-dunkin-orange hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://x.com/dunkindonuts?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" class="bg-white/10 hover:bg-dunkin-orange w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-white/20 hover:border-dunkin-orange hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.youtube.com/user/dunkindonuts" class="bg-white/10 hover:bg-dunkin-orange w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-white/20 hover:border-dunkin-orange hover:text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-fredoka text-lg font-bold mb-4 text-white">
+                        Quick Links
+                    </h4>
+                    <ul class="space-y-2">
+                        <li><a href="#menu" class="text-gray-100 hover:text-dunkin-orange transition-colors duration-200">Menu</a></li>
+                        <li><a href="#about" class="text-gray-100 hover:text-dunkin-orange transition-colors duration-200">About Us</a></li>
+                        <li><a href="#contact" class="text-gray-100 hover:text-dunkin-orange transition-colors duration-200">Locations</a></li>
+                        <li><a href="#" class="text-gray-100 hover:text-dunkin-orange transition-colors duration-200">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-fredoka text-lg font-bold mb-4 text-white">Contact Us</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 group">
+                            <i class="fas fa-phone text-dunkin-orange"></i>
+                            <a href="tel:19655" class="text-gray-100 group-hover:text-dunkin-orange transition-colors duration-200">19655</a>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <i class="fas fa-envelope text-dunkin-orange"></i>
+                            <a href="mailto:info@dunkinegypt.com" class="text-gray-100 group-hover:text-dunkin-orange transition-colors duration-200 text-sm">info@dunkinegypt.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-clock text-dunkin-orange mt-1"></i>
+                            <div class="text-gray-100 text-sm">
+                                <p>Mon - Thu: 6AM - 10PM</p>
+                                <p>Fri - Sun: 6AM - 11PM</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Download App -->
+                <div>
+                    <h4 class="font-fredoka text-lg font-bold mb-4 text-white">Download Our App</h4>
+                    <p class="text-gray-100 text-sm mb-4">Order ahead and earn rewards!</p>
+                    <div class="space-y-3">
+                        <a href="#" class="block hover:opacity-80 transition-opacity">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" 
+                                alt="Download on App Store" 
+                                class="h-10">
+                        </a>
+                        <a href="#" class="block hover:opacity-80 transition-opacity">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
+                                alt="Get it on Google Play" 
+                                class="h-10">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom - Add this for copyright -->
+            <div class="border-t border-white/20 pt-8 mt-8 text-center">
+                <p class="text-gray-100 text-sm">
+                    © 2024 Dunkin' Egypt. All rights reserved. | 
+                    <a href="#" class="hover:text-dunkin-orange transition-colors">Privacy Policy</a> | 
+                    <a href="#" class="hover:text-dunkin-orange transition-colors">Terms</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+<script src="./js/app.js"></script>
+</body>
+</html>
